@@ -1,8 +1,8 @@
 object Form1: TForm1
-  Left = 169
-  Top = 149
-  Width = 1041
-  Height = 540
+  Left = 321
+  Top = 148
+  Width = 1058
+  Height = 482
   Caption = 'Form1'
   Color = clSkyBlue
   UseDockManager = True
@@ -20,14 +20,14 @@ object Form1: TForm1
   object background: TShape
     Left = 0
     Top = 0
-    Width = 1025
-    Height = 501
+    Width = 1042
+    Height = 443
     Align = alClient
     Brush.Color = clMedGray
   end
   object paddle1: TImage
     Left = 32
-    Top = 200
+    Top = 216
     Width = 20
     Height = 100
     AutoSize = True
@@ -558,5 +558,11 @@ object Form1: TForm1
     OnTimer = paddle2DownTimer
     Left = 976
     Top = 56
+  end
+  object ballMove: TTimer
+    Interval = 10
+    OnTimer = ballMoveTimer
+    Left = 480
+    Top = 40
   end
 end
