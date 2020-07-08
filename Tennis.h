@@ -25,7 +25,6 @@ __published:	// IDE-managed Components
         TTimer *ballMove;
         TPanel *newGameButton;
         TPanel *soundButton;
-        TLabel *gameModeLabel;
         TPanel *leftChoiceButton;
         TPanel *rightChoiceButton;
         TLabel *labelSpecyfyingGameMode;
@@ -65,8 +64,26 @@ __published:	// IDE-managed Components
           TMouseButton Button, TShiftState Shift, int X, int Y);
         void __fastcall soundButtonMouseUp(TObject *Sender,
           TMouseButton Button, TShiftState Shift, int X, int Y);
+        void __fastcall leftChoiceButtonClick(TObject *Sender);
+        void __fastcall rightChoiceButtonClick(TObject *Sender);
+        void __fastcall soundButtonClick(TObject *Sender);
 private:	// User declarations
-void setComponentVisibilityAndActivityAfterTheEndOfRound();
+int leapOfPaddle;
+int xLeapOfBall ;
+ int yLeapOfBall ;
+
+    int numberOfReflections;
+ int leftPlayerPoints ;
+  int rightPlayerPoints ;
+  bool sound;
+  AnsiString gameMode;
+
+
+void setMatchComponentVisibilityAndActivityAfterTheEndOfRound();
+void setTrainingComponentVisibilityAndActivityAfterTheEndOfRound();
+void twoPlayerMode();
+void trainingMode();
+void setComponentVisibilityAndActivityForTheMach();
 
 public:		// User declarations
         __fastcall TForm1(TComponent* Owner);
