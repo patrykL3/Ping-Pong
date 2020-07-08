@@ -9,6 +9,7 @@
 #include <Forms.hpp>
 #include <ExtCtrls.hpp>
 #include <Graphics.hpp>
+#include "mmsystem.h"
 //---------------------------------------------------------------------------
 class TForm1 : public TForm
 {
@@ -23,14 +24,14 @@ __published:	// IDE-managed Components
         TTimer *paddle2Down;
         TTimer *ballMove;
         TPanel *newGameButton;
-        TPanel *sound;
+        TPanel *soundButton;
         TLabel *gameModeLabel;
-        TPanel *L;
-        TPanel *R;
-        TLabel *gameMode;
+        TPanel *leftChoiceButton;
+        TPanel *rightChoiceButton;
+        TLabel *labelSpecyfyingGameMode;
         TLabel *gameLabel;
-        TLabel *score;
-        TLabel *numberOfReflection;
+        TLabel *scoreLabel;
+        TLabel *numberOfReflectionLabel;
         TLabel *soundLabel;
         TPanel *continueGameButton;
         void __fastcall paddle1UpTimer(TObject *Sender);
@@ -42,27 +43,31 @@ __published:	// IDE-managed Components
         void __fastcall paddle2UpTimer(TObject *Sender);
         void __fastcall paddle2DownTimer(TObject *Sender);
         void __fastcall ballMoveTimer(TObject *Sender);
-        void __fastcall newGameButtonMouseDown(TObject *Sender,
-          TMouseButton Button, TShiftState Shift, int X, int Y);
-        void __fastcall newGameButtonMouseUp(TObject *Sender,
-          TMouseButton Button, TShiftState Shift, int X, int Y);
-        void __fastcall soundMouseDown(TObject *Sender,
-          TMouseButton Button, TShiftState Shift, int X, int Y);
-        void __fastcall soundMouseUp(TObject *Sender, TMouseButton Button,
-          TShiftState Shift, int X, int Y);
-        void __fastcall LMouseDown(TObject *Sender, TMouseButton Button,
-          TShiftState Shift, int X, int Y);
-        void __fastcall LMouseUp(TObject *Sender, TMouseButton Button,
-          TShiftState Shift, int X, int Y);
-        void __fastcall RMouseDown(TObject *Sender, TMouseButton Button,
-          TShiftState Shift, int X, int Y);
-        void __fastcall RMouseUp(TObject *Sender, TMouseButton Button,
-          TShiftState Shift, int X, int Y);
+        void __fastcall newGameButtonClick(TObject *Sender);
+        void __fastcall continueGameButtonClick(TObject *Sender);
         void __fastcall continueGameButtonMouseDown(TObject *Sender,
           TMouseButton Button, TShiftState Shift, int X, int Y);
         void __fastcall continueGameButtonMouseUp(TObject *Sender,
           TMouseButton Button, TShiftState Shift, int X, int Y);
+        void __fastcall newGameButtonMouseDown(TObject *Sender,
+          TMouseButton Button, TShiftState Shift, int X, int Y);
+        void __fastcall newGameButtonMouseUp(TObject *Sender,
+          TMouseButton Button, TShiftState Shift, int X, int Y);
+        void __fastcall leftChoiceButtonMouseDown(TObject *Sender,
+          TMouseButton Button, TShiftState Shift, int X, int Y);
+        void __fastcall leftChoiceButtonMouseUp(TObject *Sender,
+          TMouseButton Button, TShiftState Shift, int X, int Y);
+        void __fastcall rightChoiceButtonMouseDown(TObject *Sender,
+          TMouseButton Button, TShiftState Shift, int X, int Y);
+        void __fastcall rightChoiceButtonMouseUp(TObject *Sender,
+          TMouseButton Button, TShiftState Shift, int X, int Y);
+        void __fastcall soundButtonMouseDown(TObject *Sender,
+          TMouseButton Button, TShiftState Shift, int X, int Y);
+        void __fastcall soundButtonMouseUp(TObject *Sender,
+          TMouseButton Button, TShiftState Shift, int X, int Y);
 private:	// User declarations
+void setComponentVisibilityAndActivityAfterTheEndOfRound();
+
 public:		// User declarations
         __fastcall TForm1(TComponent* Owner);
 };

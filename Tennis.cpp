@@ -12,6 +12,11 @@ int leapOfPaddle = 10;
 int xLeapOfBall = -5;
  int yLeapOfBall = -5;
 
+    int numberOfReflections = 0;
+ int leftPlayerPoints = 0;
+  int rightPlayerPoints = 0;
+
+
 //---------------------------------------------------------------------------
 __fastcall TForm1::TForm1(TComponent* Owner)
         : TForm(Owner)
@@ -20,12 +25,12 @@ __fastcall TForm1::TForm1(TComponent* Owner)
 //---------------------------------------------------------------------------
 void __fastcall TForm1::paddle1UpTimer(TObject *Sender)
 {
-        if(paddle1 -> Top > 10) paddle1 -> Top -= leapOfPaddle;
+        if(paddle1 -> Top > 10 && newGameButton->Visible == false) paddle1 -> Top -= leapOfPaddle;
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::paddle1DownTimer(TObject *Sender)
 {
-        if(paddle1->Top + paddle1->Height < background->Height -15) paddle1->Top += leapOfPaddle;
+        if(paddle1->Top + paddle1->Height < background->Height -15 && newGameButton->Visible == false) paddle1->Top += leapOfPaddle;
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::FormKeyDown(TObject *Sender, WORD &Key,
@@ -49,15 +54,42 @@ void __fastcall TForm1::FormKeyUp(TObject *Sender, WORD &Key,
 
 void __fastcall TForm1::paddle2UpTimer(TObject *Sender)
 {
-        if(paddle2->Top > 10) paddle2->Top -= leapOfPaddle;
+        if(paddle2->Top > 10 && newGameButton->Visible == false) paddle2->Top -= leapOfPaddle;
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TForm1::paddle2DownTimer(TObject *Sender)
 {
-         if(paddle2->Top + paddle2->Height < background->Height -15) paddle2->Top += leapOfPaddle;
+         if(paddle2->Top + paddle2->Height < background->Height -15 && newGameButton->Visible == false) paddle2->Top += leapOfPaddle;
 }
 //---------------------------------------------------------------------------
+
+
+
+void TForm1::setComponentVisibilityAndActivityAfterTheEndOfRound(){
+                ballMove->Enabled = false;
+                ball->Visible = false;
+                
+                  gameLabel->Visible = true;
+                scoreLabel->Visible = true;
+                numberOfReflectionLabel->Visible = true;
+                gameModeLabel->Visible = true;
+                labelSpecyfyingGameMode->Visible = true;
+                soundLabel->Visible = true;
+
+                continueGameButton->Enabled = true;
+                newGameButton->Enabled = true;
+                leftChoiceButton->Enabled = true;
+                rightChoiceButton->Enabled = true;
+                soundButton->Enabled = true;
+
+                continueGameButton->Visible = true;
+                newGameButton->Visible = true;
+                leftChoiceButton->Visible = true;
+                rightChoiceButton->Visible = true;
+                soundButton->Visible = true;
+}
+
 
 void __fastcall TForm1::ballMoveTimer(TObject *Sender)
 {
@@ -68,75 +100,105 @@ void __fastcall TForm1::ballMoveTimer(TObject *Sender)
 
         //paddle2->Top = ball->Top -30;
 
-        if(ball->Left < paddle1->Left + paddle1->Width - 15 || ball->Left + ball->Width > paddle2->Left + 15){
-                ballMove->Enabled = false;
-                ball->Visible = false;
-        } else if(ball->Top  > paddle1->Top - ball->Height/2 && ball->Top  < paddle1->Top + paddle1->Height - ball->Height/2 && ball->Left <= paddle1->Left + paddle1->Width) {
-                if(yLeapOfBall > 0) yLeapOfBall = -yLeapOfBall;
+
+
+          if(ball->Top  > paddle1->Top - ball->Height/2 && ball->Top  < paddle1->Top + paddle1->Height - ball->Height/2 && ball->Left <= paddle1->Left + paddle1->Width) {
+                sndPlaySound("Project file\\soundReflection.wav", SND_ASYNC);
+                if(yLeapOfBall > 0) {
+                        yLeapOfBall = -yLeapOfBall;
+                        numberOfReflections++;
+                }
         } else if(ball->Top  > paddle2->Top - ball->Height/2 && ball->Top  < paddle2->Top + paddle2->Height - ball->Height/2 && ball->Left + ball->Width >= paddle2->Left) {
-                if(yLeapOfBall < 0) yLeapOfBall = -yLeapOfBall;
+                 sndPlaySound("Project file\\soundReflection.wav", SND_ASYNC);
+                if(yLeapOfBall < 0) {
+                        yLeapOfBall = -yLeapOfBall;
+                        numberOfReflections++;
+
+                        }
+        }
+        else if(ball->Left < paddle1->Left + paddle1->Width - 15 ){
+                setComponentVisibilityAndActivityAfterTheEndOfRound();
+                numberOfReflectionLabel->Caption =  "Iloœæ odbiæ: " + IntToStr(numberOfReflections);
+                gameLabel->Caption = "Punkt dla gracza Prawego >";
+                rightPlayerPoints++;
+                scoreLabel->Caption = "Wynik: " + IntToStr(leftPlayerPoints) + ":" + IntToStr(rightPlayerPoints);
+                numberOfReflections = 0;
+        } else if (ball->Left + ball->Width > paddle2->Left + 15) {
+                setComponentVisibilityAndActivityAfterTheEndOfRound();
+                numberOfReflectionLabel->Caption =  "Iloœæ odbiæ: " + IntToStr(numberOfReflections);
+                gameLabel->Caption = "< Punkt dla gracza Lewego";
+                leftPlayerPoints++;
+                scoreLabel->Caption = "Wynik: " + IntToStr(leftPlayerPoints) + ":" + IntToStr(rightPlayerPoints);
+                numberOfReflections = 0;
         }
 }
 //---------------------------------------------------------------------------
 
-
-void __fastcall TForm1::newGameButtonMouseDown(TObject *Sender,
-      TMouseButton Button, TShiftState Shift, int X, int Y)
+void __fastcall TForm1::newGameButtonClick(TObject *Sender)
 {
-          newGameButton->BevelOuter = bvLowered;
+        ball->Top = 264;
+        ball->Left = 464;
+        // paddle1->Top =
+        // paddle1->Left =
+        // paddle2->Top =
+        // paddle2->Left =
+         numberOfReflections = 0;
+ leftPlayerPoints = 0;
+  rightPlayerPoints = 0;
+        ball->Visible = true;
+        ballMove->Enabled = true;
+
+        gameLabel->Visible = false;
+        scoreLabel->Visible = false;
+        numberOfReflectionLabel->Visible = false;
+        gameModeLabel->Visible = false;
+        labelSpecyfyingGameMode->Visible = false;
+        soundLabel->Visible = false;
+
+        continueGameButton->Enabled = false;
+        newGameButton->Enabled = false;
+        leftChoiceButton->Enabled = false;
+        rightChoiceButton->Enabled = false;
+        soundButton->Enabled = false;
+
+        continueGameButton->Visible = false;
+        newGameButton->Visible = false;
+        leftChoiceButton->Visible = false;
+        rightChoiceButton->Visible = false;
+        soundButton->Visible = false;
+
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TForm1::newGameButtonMouseUp(TObject *Sender,
-      TMouseButton Button, TShiftState Shift, int X, int Y)
+void __fastcall TForm1::continueGameButtonClick(TObject *Sender)
 {
-        newGameButton->BevelOuter = bvRaised;
+        ball->Top = 264;
+        ball->Left = 464;
+        ball->Visible = true;
+        ballMove->Enabled = true;
+
+        gameLabel->Visible = false;
+        scoreLabel->Visible = false;
+        numberOfReflectionLabel->Visible = false;
+        gameModeLabel->Visible = false;
+        labelSpecyfyingGameMode->Visible = false;
+        soundLabel->Visible = false;
+
+        continueGameButton->Enabled = false;
+        newGameButton->Enabled = false;
+        leftChoiceButton->Enabled = false;
+        rightChoiceButton->Enabled = false;
+        soundButton->Enabled = false;
+
+        continueGameButton->Visible = false;
+        newGameButton->Visible = false;
+        leftChoiceButton->Visible = false;
+        rightChoiceButton->Visible = false;
+        soundButton->Visible = false;
+
 }
 //---------------------------------------------------------------------------
 
-
-void __fastcall TForm1::soundMouseDown(TObject *Sender,
-      TMouseButton Button, TShiftState Shift, int X, int Y)
-{        sound->BevelOuter = bvLowered;
-
-}
-//---------------------------------------------------------------------------
-
-void __fastcall TForm1::soundMouseUp(TObject *Sender, TMouseButton Button,
-      TShiftState Shift, int X, int Y)
-{
-        sound->BevelOuter = bvRaised;
-}
-//---------------------------------------------------------------------------
-
-void __fastcall TForm1::LMouseDown(TObject *Sender, TMouseButton Button,
-      TShiftState Shift, int X, int Y)
-{
-          L->BevelOuter = bvLowered;
-}
-//---------------------------------------------------------------------------
-
-void __fastcall TForm1::LMouseUp(TObject *Sender, TMouseButton Button,
-      TShiftState Shift, int X, int Y)
-{
-          L->BevelOuter = bvRaised;
-}
-//---------------------------------------------------------------------------
-
-
-void __fastcall TForm1::RMouseDown(TObject *Sender, TMouseButton Button,
-      TShiftState Shift, int X, int Y)
-{
-         R->BevelOuter = bvLowered;
-}
-//---------------------------------------------------------------------------
-
-void __fastcall TForm1::RMouseUp(TObject *Sender, TMouseButton Button,
-      TShiftState Shift, int X, int Y)
-{
-        R->BevelOuter = bvRaised;
-}
-//---------------------------------------------------------------------------
 
 void __fastcall TForm1::continueGameButtonMouseDown(TObject *Sender,
       TMouseButton Button, TShiftState Shift, int X, int Y)
@@ -148,7 +210,65 @@ void __fastcall TForm1::continueGameButtonMouseDown(TObject *Sender,
 void __fastcall TForm1::continueGameButtonMouseUp(TObject *Sender,
       TMouseButton Button, TShiftState Shift, int X, int Y)
 {
-         continueGameButton->BevelOuter = bvRaised;
+       continueGameButton->BevelOuter = bvRaised;
 }
 //---------------------------------------------------------------------------
+
+void __fastcall TForm1::newGameButtonMouseDown(TObject *Sender,
+      TMouseButton Button, TShiftState Shift, int X, int Y)
+{
+          newGameButton->BevelOuter = bvLowered;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::newGameButtonMouseUp(TObject *Sender,
+      TMouseButton Button, TShiftState Shift, int X, int Y)
+{
+      newGameButton->BevelOuter = bvRaised;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::leftChoiceButtonMouseDown(TObject *Sender,
+      TMouseButton Button, TShiftState Shift, int X, int Y)
+{
+       leftChoiceButton->BevelOuter = bvLowered;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::leftChoiceButtonMouseUp(TObject *Sender,
+      TMouseButton Button, TShiftState Shift, int X, int Y)
+{
+      leftChoiceButton->BevelOuter = bvRaised;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::rightChoiceButtonMouseDown(TObject *Sender,
+      TMouseButton Button, TShiftState Shift, int X, int Y)
+{
+      rightChoiceButton->BevelOuter = bvLowered;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::rightChoiceButtonMouseUp(TObject *Sender,
+      TMouseButton Button, TShiftState Shift, int X, int Y)
+{
+     rightChoiceButton->BevelOuter = bvRaised;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::soundButtonMouseDown(TObject *Sender,
+      TMouseButton Button, TShiftState Shift, int X, int Y)
+{
+       soundButton->BevelOuter = bvLowered;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::soundButtonMouseUp(TObject *Sender,
+      TMouseButton Button, TShiftState Shift, int X, int Y)
+{
+       soundButton->BevelOuter = bvRaised;
+}
+//---------------------------------------------------------------------------
+
+
 

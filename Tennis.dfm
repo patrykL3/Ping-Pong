@@ -534,8 +534,8 @@ object Form1: TForm1
   object gameModeLabel: TLabel
     Left = 272
     Top = 384
-    Width = 81
-    Height = 33
+    Width = 72
+    Height = 25
     Caption = 'Tryb gry'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -544,12 +544,12 @@ object Form1: TForm1
     Font.Style = []
     ParentFont = False
   end
-  object gameMode: TLabel
-    Left = 424
+  object labelSpecyfyingGameMode: TLabel
+    Left = 432
     Top = 392
-    Width = 82
+    Width = 63
     Height = 20
-    Caption = 'gameMode'
+    Caption = '2 graczy'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -16
@@ -558,43 +558,45 @@ object Form1: TForm1
     ParentFont = False
   end
   object gameLabel: TLabel
-    Left = 384
-    Top = 24
-    Width = 177
-    Height = 49
+    Left = 416
+    Top = 16
+    Width = 155
+    Height = 42
     Caption = 'Ping Pong!'
-    Font.Charset = DEFAULT_CHARSET
+    Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
     Font.Height = -31
-    Font.Name = 'MS Sans Serif'
-    Font.Style = []
+    Font.Name = '@Yu Gothic UI Semibold'
+    Font.Style = [fsBold, fsItalic]
     ParentFont = False
   end
-  object score: TLabel
+  object scoreLabel: TLabel
     Left = 440
     Top = 88
-    Width = 48
+    Width = 96
     Height = 25
-    Caption = 'score'
+    Caption = 'scoreLabel'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -20
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
+    Visible = False
   end
-  object numberOfReflection: TLabel
+  object numberOfReflectionLabel: TLabel
     Left = 392
     Top = 136
-    Width = 172
+    Width = 220
     Height = 25
-    Caption = 'numberOfReflection'
+    Caption = 'numberOfReflectionLabel'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -20
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
+    Visible = False
   end
   object soundLabel: TLabel
     Left = 336
@@ -614,41 +616,42 @@ object Form1: TForm1
     Top = 336
     Width = 185
     Height = 41
-    BevelOuter = bvNone
     Caption = 'Nowa gra'
+    ParentColor = True
     TabOrder = 0
+    OnClick = newGameButtonClick
     OnMouseDown = newGameButtonMouseDown
     OnMouseUp = newGameButtonMouseUp
   end
-  object sound: TPanel
+  object soundButton: TPanel
     Left = 440
     Top = 440
     Width = 57
     Height = 41
-    Caption = 'sound'
+    Caption = 'soundButton'
     TabOrder = 1
-    OnMouseDown = soundMouseDown
-    OnMouseUp = soundMouseUp
+    OnMouseDown = soundButtonMouseDown
+    OnMouseUp = soundButtonMouseUp
   end
-  object L: TPanel
+  object leftChoiceButton: TPanel
     Left = 376
     Top = 384
     Width = 41
     Height = 41
-    Caption = 'L'
+    Caption = 'leftChoiceButton'
     TabOrder = 2
-    OnMouseDown = LMouseDown
-    OnMouseUp = LMouseUp
+    OnMouseDown = leftChoiceButtonMouseDown
+    OnMouseUp = leftChoiceButtonMouseUp
   end
-  object R: TPanel
+  object rightChoiceButton: TPanel
     Left = 520
     Top = 384
     Width = 41
     Height = 41
-    Caption = 'R'
+    Caption = 'rightChoiceButton'
     TabOrder = 3
-    OnMouseDown = RMouseDown
-    OnMouseUp = RMouseUp
+    OnMouseDown = rightChoiceButtonMouseDown
+    OnMouseUp = rightChoiceButtonMouseUp
   end
   object continueGameButton: TPanel
     Left = 384
@@ -656,7 +659,10 @@ object Form1: TForm1
     Width = 185
     Height = 41
     Caption = 'Kontynuuj gr'#281
+    Enabled = False
     TabOrder = 4
+    Visible = False
+    OnClick = continueGameButtonClick
     OnMouseDown = continueGameButtonMouseDown
     OnMouseUp = continueGameButtonMouseUp
   end
@@ -689,6 +695,7 @@ object Form1: TForm1
     Top = 56
   end
   object ballMove: TTimer
+    Enabled = False
     Interval = 10
     OnTimer = ballMoveTimer
     Left = 504
