@@ -1,8 +1,8 @@
 object Form1: TForm1
-  Left = 321
-  Top = 148
+  Left = 280
+  Top = 179
   Width = 1058
-  Height = 482
+  Height = 552
   Caption = 'Form1'
   Color = clSkyBlue
   UseDockManager = True
@@ -21,7 +21,7 @@ object Form1: TForm1
     Left = 0
     Top = 0
     Width = 1042
-    Height = 443
+    Height = 513
     Align = alClient
     Brush.Color = clMedGray
   end
@@ -225,8 +225,8 @@ object Form1: TForm1
     Transparent = True
   end
   object ball: TImage
-    Left = 480
-    Top = 192
+    Left = 464
+    Top = 264
     Width = 32
     Height = 32
     AutoSize = True
@@ -334,7 +334,7 @@ object Form1: TForm1
   end
   object paddle2: TImage
     Left = 976
-    Top = 200
+    Top = 184
     Width = 20
     Height = 100
     AutoSize = True
@@ -531,6 +531,135 @@ object Form1: TForm1
       17291E17291E17291E17291E17291EFFFFFF}
     Transparent = True
   end
+  object gameModeLabel: TLabel
+    Left = 272
+    Top = 384
+    Width = 81
+    Height = 33
+    Caption = 'Tryb gry'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -20
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+  end
+  object gameMode: TLabel
+    Left = 424
+    Top = 392
+    Width = 82
+    Height = 20
+    Caption = 'gameMode'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+  end
+  object gameLabel: TLabel
+    Left = 384
+    Top = 24
+    Width = 177
+    Height = 49
+    Caption = 'Ping Pong!'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -31
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+  end
+  object score: TLabel
+    Left = 440
+    Top = 88
+    Width = 48
+    Height = 25
+    Caption = 'score'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -20
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+  end
+  object numberOfReflection: TLabel
+    Left = 392
+    Top = 136
+    Width = 172
+    Height = 25
+    Caption = 'numberOfReflection'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -20
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+  end
+  object soundLabel: TLabel
+    Left = 336
+    Top = 448
+    Width = 74
+    Height = 25
+    Caption = 'D'#378'wi'#281'k: '
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -20
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+  end
+  object newGameButton: TPanel
+    Left = 368
+    Top = 336
+    Width = 185
+    Height = 41
+    BevelOuter = bvNone
+    Caption = 'Nowa gra'
+    TabOrder = 0
+    OnMouseDown = newGameButtonMouseDown
+    OnMouseUp = newGameButtonMouseUp
+  end
+  object sound: TPanel
+    Left = 440
+    Top = 440
+    Width = 57
+    Height = 41
+    Caption = 'sound'
+    TabOrder = 1
+    OnMouseDown = soundMouseDown
+    OnMouseUp = soundMouseUp
+  end
+  object L: TPanel
+    Left = 376
+    Top = 384
+    Width = 41
+    Height = 41
+    Caption = 'L'
+    TabOrder = 2
+    OnMouseDown = LMouseDown
+    OnMouseUp = LMouseUp
+  end
+  object R: TPanel
+    Left = 520
+    Top = 384
+    Width = 41
+    Height = 41
+    Caption = 'R'
+    TabOrder = 3
+    OnMouseDown = RMouseDown
+    OnMouseUp = RMouseUp
+  end
+  object continueGameButton: TPanel
+    Left = 384
+    Top = 176
+    Width = 185
+    Height = 41
+    Caption = 'Kontynuuj gr'#281
+    TabOrder = 4
+    OnMouseDown = continueGameButtonMouseDown
+    OnMouseUp = continueGameButtonMouseUp
+  end
   object paddle1Up: TTimer
     Enabled = False
     Interval = 10
@@ -562,7 +691,7 @@ object Form1: TForm1
   object ballMove: TTimer
     Interval = 10
     OnTimer = ballMoveTimer
-    Left = 480
-    Top = 40
+    Left = 504
+    Top = 264
   end
 end
