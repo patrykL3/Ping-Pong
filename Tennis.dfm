@@ -1,9 +1,10 @@
 object formGame: TformGame
   Left = 186
   Top = 178
-  Width = 1155
-  Height = 552
+  BorderStyle = bsToolWindow
   Caption = 'Ping Pong!'
+  ClientHeight = 513
+  ClientWidth = 1139
   Color = clSkyBlue
   UseDockManager = True
   DockSite = True

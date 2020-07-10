@@ -21,7 +21,7 @@ __fastcall TformGame::TformGame(TComponent* Owner)
     rightPlayerPoints = 0;
     sound = true;
     gameMode = labelSpecyfyingGameMode->Caption;
-    SOUND_FILE_PATH = "Project file\\soundReflection.wav";
+    soundFilePath = "Project file\\soundReflection.wav";
     ShowMessage("Witaj w grze ping pong!" sLineBreak sLineBreak "Najpierw wybierz tryb gry." sLineBreak sLineBreak
         "1) W trybie dwóch graczy lewy u¿ytkownik steruje wciskaj¹c klawisze A i Z. Prawy u¿ytkownik wciska strza³ki do góry i w dó³." sLineBreak
         "Kiedy odbijesz pi³kê od œrodka paletki pi³ka przyœpieszy." sLineBreak sLineBreak
@@ -30,7 +30,7 @@ __fastcall TformGame::TformGame(TComponent* Owner)
 }
 //---------------------------------------------------------------------------
 
-void TformGame::resetBallAndPaddlesPosition() {
+void __fastcall TformGame::resetBallAndPaddlesPosition() {
     ball->Top = 224;
     ball->Left = 552;
     paddle1->Top =  160;
@@ -39,21 +39,21 @@ void TformGame::resetBallAndPaddlesPosition() {
     paddle2->Left = 1096;
 }
 
-void TformGame::rightChoiceButtonFunction() {
+void __fastcall TformGame::rightChoiceButtonFunction() {
     if(labelSpecyfyingGameMode->Caption == "2 graczy")
         labelSpecyfyingGameMode->Caption = "Trening";
     else if (labelSpecyfyingGameMode->Caption == "Trening")
         labelSpecyfyingGameMode->Caption = "2 graczy";
 }
 
-void TformGame::leftChoiceButtonFunction() {
+void __fastcall TformGame::leftChoiceButtonFunction() {
     if(labelSpecyfyingGameMode->Caption == "2 graczy")
         labelSpecyfyingGameMode->Caption = "Trening";
     else if (labelSpecyfyingGameMode->Caption == "Trening")
         labelSpecyfyingGameMode->Caption = "2 graczy";
 }
 
-void TformGame::soundButtonFunction() {
+void __fastcall TformGame::soundButtonFunction() {
     if(sound) {
         sound = false;
         soundOnImage->Picture->LoadFromFile("Project file\\sound off.bmp");
@@ -63,7 +63,7 @@ void TformGame::soundButtonFunction() {
     }
 }
 
-void TformGame::trainingMode() {
+void __fastcall TformGame::trainingMode() {
     if(ball->Top > paddle2->Height/2 - ball->Height/2 && ball->Top < background->Height - paddle2->Height/2  - ball->Height/2)
         paddle2->Top = ball->Top + ball->Height/2 - paddle2->Height/2;
 
@@ -75,14 +75,14 @@ void TformGame::trainingMode() {
         yLeapOfBall = initialLeapOfBall;
     } else if(ball->Top  > paddle1->Top - ball->Height/2 && ball->Top  < paddle1->Top + paddle1->Height - ball->Height/2 && ball->Left <= paddle1->Left + paddle1->Width) {
         if(sound)
-            sndPlaySound(SOUND_FILE_PATH.c_str(), SND_ASYNC);
+            sndPlaySound(soundFilePath.c_str(), SND_ASYNC);
         if(yLeapOfBall > 0) {
             yLeapOfBall = -yLeapOfBall;
             numberOfReflections++;
         }
     }  else if(ball->Top  > paddle2->Top - ball->Height/2 && ball->Top  < paddle2->Top + paddle2->Height - ball->Height/2 && ball->Left + ball->Width >= paddle2->Left) {
         if(sound)
-            sndPlaySound(SOUND_FILE_PATH.c_str(), SND_ASYNC);
+            sndPlaySound(soundFilePath.c_str(), SND_ASYNC);
         if(yLeapOfBall < 0) {
             yLeapOfBall = -yLeapOfBall;
             if(checkThatTheBallHitsTheCenterOfThePaddle(paddle2))
@@ -91,7 +91,7 @@ void TformGame::trainingMode() {
     }
 }
 
-void TformGame::twoPlayerMode() {
+void __fastcall TformGame::twoPlayerMode() {
     if(ball->Left < paddle1->Left + paddle1->Width - 25) {
         setMatchComponentVisibilityAndActivityAfterTheEndOfRound();
         numberOfReflectionLabel->Caption =  "Iloœæ odbiæ: " + IntToStr(numberOfReflections);
@@ -110,7 +110,7 @@ void TformGame::twoPlayerMode() {
         yLeapOfBall = initialLeapOfBall;
     } else if(ball->Top  > paddle1->Top - ball->Height/2 && ball->Top  < paddle1->Top + paddle1->Height - ball->Height/2 && ball->Left <= paddle1->Left + paddle1->Width) {
         if(sound)
-            sndPlaySound(SOUND_FILE_PATH.c_str(), SND_ASYNC);
+            sndPlaySound(soundFilePath.c_str(), SND_ASYNC);
         if(yLeapOfBall > 0) {
             yLeapOfBall = -yLeapOfBall;
             numberOfReflections++;
@@ -119,7 +119,7 @@ void TformGame::twoPlayerMode() {
         }
     } else if(ball->Top  > paddle2->Top - ball->Height/2 && ball->Top  < paddle2->Top + paddle2->Height - ball->Height/2 && ball->Left + ball->Width >= paddle2->Left) {
         if(sound)
-            sndPlaySound(SOUND_FILE_PATH.c_str(), SND_ASYNC);
+            sndPlaySound(soundFilePath.c_str(), SND_ASYNC);
         if(yLeapOfBall < 0) {
             yLeapOfBall = -yLeapOfBall;
             numberOfReflections++;
@@ -129,11 +129,11 @@ void TformGame::twoPlayerMode() {
     }
 }
 
-bool TformGame::checkThatTheBallHitsTheCenterOfThePaddle(TImage *paddle) {
+bool __fastcall TformGame::checkThatTheBallHitsTheCenterOfThePaddle(TImage *paddle) {
      return (ball->Top  > paddle->Top + paddle->Height/2 - ball->Height*3/4 && ball->Top  < paddle->Top  + paddle->Height/2 - ball->Height*1/4) ? true : false;
 }
 
-void TformGame::setCommonForAllModesComponentVisibilityAndActivityAfterTheEndOfRound() {
+void __fastcall TformGame::setCommonForAllModesComponentVisibilityAndActivityAfterTheEndOfRound() {
     ballMove->Enabled = false;
     ball->Visible = false;
 
@@ -155,17 +155,17 @@ void TformGame::setCommonForAllModesComponentVisibilityAndActivityAfterTheEndOfR
     soundButton->Visible = true;
 }
 
-void TformGame::setTrainingComponentVisibilityAndActivityAfterTheEndOfRound() {
+void __fastcall TformGame::setTrainingComponentVisibilityAndActivityAfterTheEndOfRound() {
     scoreLabel->Visible = false;
     setCommonForAllModesComponentVisibilityAndActivityAfterTheEndOfRound();
 
 }
-void TformGame::setMatchComponentVisibilityAndActivityAfterTheEndOfRound() {
+void __fastcall TformGame::setMatchComponentVisibilityAndActivityAfterTheEndOfRound() {
     scoreLabel->Visible = true;
     setCommonForAllModesComponentVisibilityAndActivityAfterTheEndOfRound();
 }
 
-void TformGame::setComponentVisibilityAndActivityForTheMach() {
+void __fastcall TformGame::setComponentVisibilityAndActivityForTheMach() {
 
     resetBallAndPaddlesPosition();
     numberOfReflections = 0;
@@ -177,7 +177,7 @@ void TformGame::setComponentVisibilityAndActivityForTheMach() {
     hideAndDisabledComponentsForTheGame();
 }
 
-void TformGame::hideAndDisabledComponentsForTheGame() {
+void __fastcall TformGame::hideAndDisabledComponentsForTheGame() {
     gameLabel->Visible = false;
     scoreLabel->Visible = false;
     numberOfReflectionLabel->Visible = false;

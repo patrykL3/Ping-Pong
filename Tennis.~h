@@ -36,48 +36,32 @@ __published:	// IDE-managed Components
     TImage *leftArrowImage;
     void __fastcall paddle1UpTimer(TObject *Sender);
     void __fastcall paddle1DownTimer(TObject *Sender);
-    void __fastcall FormKeyDown(TObject *Sender, WORD &Key,
-                                TShiftState Shift);
-    void __fastcall FormKeyUp(TObject *Sender, WORD &Key,
-                              TShiftState Shift);
+    void __fastcall FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
+    void __fastcall FormKeyUp(TObject *Sender, WORD &Key,TShiftState Shift);
     void __fastcall paddle2UpTimer(TObject *Sender);
     void __fastcall paddle2DownTimer(TObject *Sender);
     void __fastcall ballMoveTimer(TObject *Sender);
     void __fastcall newGameButtonClick(TObject *Sender);
     void __fastcall continueGameButtonClick(TObject *Sender);
-    void __fastcall continueGameButtonMouseDown(TObject *Sender,
-            TMouseButton Button, TShiftState Shift, int X, int Y);
-    void __fastcall continueGameButtonMouseUp(TObject *Sender,
-            TMouseButton Button, TShiftState Shift, int X, int Y);
-    void __fastcall newGameButtonMouseDown(TObject *Sender,
-                                           TMouseButton Button, TShiftState Shift, int X, int Y);
-    void __fastcall newGameButtonMouseUp(TObject *Sender,
-                                         TMouseButton Button, TShiftState Shift, int X, int Y);
-    void __fastcall leftChoiceButtonMouseDown(TObject *Sender,
-            TMouseButton Button, TShiftState Shift, int X, int Y);
-    void __fastcall leftChoiceButtonMouseUp(TObject *Sender,
-                                            TMouseButton Button, TShiftState Shift, int X, int Y);
-    void __fastcall rightChoiceButtonMouseDown(TObject *Sender,
-            TMouseButton Button, TShiftState Shift, int X, int Y);
-    void __fastcall rightChoiceButtonMouseUp(TObject *Sender,
-            TMouseButton Button, TShiftState Shift, int X, int Y);
-    void __fastcall soundButtonMouseDown(TObject *Sender,
-                                         TMouseButton Button, TShiftState Shift, int X, int Y);
-    void __fastcall soundButtonMouseUp(TObject *Sender,
-                                       TMouseButton Button, TShiftState Shift, int X, int Y);
+    void __fastcall continueGameButtonMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y);
+    void __fastcall continueGameButtonMouseUp(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y);
+    void __fastcall newGameButtonMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y);
+    void __fastcall newGameButtonMouseUp(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y);
+    void __fastcall leftChoiceButtonMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y);
+    void __fastcall leftChoiceButtonMouseUp(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y);
+    void __fastcall rightChoiceButtonMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y);
+    void __fastcall rightChoiceButtonMouseUp(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y);
+    void __fastcall soundButtonMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y);
+    void __fastcall soundButtonMouseUp(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y);
     void __fastcall leftChoiceButtonClick(TObject *Sender);
     void __fastcall rightChoiceButtonClick(TObject *Sender);
     void __fastcall soundButtonClick(TObject *Sender);
-    void __fastcall rightArrowImageMouseDown(TObject *Sender,
-            TMouseButton Button, TShiftState Shift, int X, int Y);
-    void __fastcall rightArrowImageMouseUp(TObject *Sender,
-                                           TMouseButton Button, TShiftState Shift, int X, int Y);
+    void __fastcall rightArrowImageMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y);
+    void __fastcall rightArrowImageMouseUp(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y);
     void __fastcall rightArrowImageClick(TObject *Sender);
     void __fastcall leftArrowImageClick(TObject *Sender);
-    void __fastcall leftArrowImageMouseDown(TObject *Sender,
-                                            TMouseButton Button, TShiftState Shift, int X, int Y);
-    void __fastcall leftArrowImageMouseUp(TObject *Sender,
-                                          TMouseButton Button, TShiftState Shift, int X, int Y);
+    void __fastcall leftArrowImageMouseDown(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y);
+    void __fastcall leftArrowImageMouseUp(TObject *Sender, TMouseButton Button, TShiftState Shift, int X, int Y);
     void __fastcall soundOnImageClick(TObject *Sender);
 
 private:	// User declarations
@@ -91,20 +75,20 @@ private:	// User declarations
     int rightPlayerPoints ;
     bool sound;
     AnsiString gameMode;
-    AnsiString SOUND_FILE_PATH;
+    AnsiString soundFilePath;
 
-    void setMatchComponentVisibilityAndActivityAfterTheEndOfRound();
-    void setTrainingComponentVisibilityAndActivityAfterTheEndOfRound();
-    void twoPlayerMode();
-    void trainingMode();
-    void setComponentVisibilityAndActivityForTheMach();
-    void rightChoiceButtonFunction();
-    void leftChoiceButtonFunction();
-    void soundButtonFunction();
-    void resetBallAndPaddlesPosition();
-    void setCommonForAllModesComponentVisibilityAndActivityAfterTheEndOfRound();
-    void hideAndDisabledComponentsForTheGame();
-    bool checkThatTheBallHitsTheCenterOfThePaddle(TImage *paddle);
+    void __fastcall setMatchComponentVisibilityAndActivityAfterTheEndOfRound();
+    void __fastcall setTrainingComponentVisibilityAndActivityAfterTheEndOfRound();
+    void __fastcall twoPlayerMode();
+    void __fastcall trainingMode();
+    void __fastcall setComponentVisibilityAndActivityForTheMach();
+    void __fastcall rightChoiceButtonFunction();
+    void __fastcall leftChoiceButtonFunction();
+    void __fastcall soundButtonFunction();
+    void __fastcall resetBallAndPaddlesPosition();
+    void __fastcall setCommonForAllModesComponentVisibilityAndActivityAfterTheEndOfRound();
+    void __fastcall hideAndDisabledComponentsForTheGame();
+    bool __fastcall checkThatTheBallHitsTheCenterOfThePaddle(TImage *paddle);
 
 public:		// User declarations
     __fastcall TformGame(TComponent* Owner);
